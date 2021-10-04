@@ -139,6 +139,29 @@ def addRandNewValue():
   game_board[rowNum][colNum] = addRandValue() 
 
 
+#check if user won 
+def isWon():
+  for row in game_board:
+    if 2048 in row:
+      return True
+    else:
+      return False
+#check if player lost
+def isLost():
+  tempGameBoard1 = copy.deepcopy(game_board)
+  tempGameBoard2 = copy.deepcopy(game_board)
+  tempGameBoard1 = mergeDownFully(tempGameBoard1)
+  if tempGameBoard1 == tempGameBoard2:
+      tempGameBoard1 = mergeUpFully(tempGameBoard1)
+      if tempGameBoard1 == tempGameBoard2:
+          tempGameBoard1 = mergeLeftFully(tempGameBoard1)
+          if tempGameBoard1 == tempGameBoard2:
+              tempGameBoard1 = mergeRightFully(tempGameBoard1)
+              if tempGameBoard1 == tempGameBoard2:
+                  return True
+  return False
+
+
 #empty board -> fill matrix w 0's first and then adding 2 numbers to the main matrix -> can be 2 or 4
 game_board = []
 for i in range(sizeOfBoard):
@@ -196,5 +219,16 @@ while not isGameOver:
     if(game_board == tempGameBoard):
       print("move unsuccessful try another direction")
     else:
-      addRandNewValue()
-      printLikeMatrix()
+      #check if game over - user won 
+      if isWon():
+        printLikeMatrix()
+        print("Game Over youre a winner")
+        isGameOver = True
+      else:
+      #add new value after every move then print out board again
+        addRandNewValue()
+        printLikeMatrix()
+        if isLost():
+          print("No moves left buddy")
+          isGameOver = True
+      

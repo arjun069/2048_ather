@@ -54,6 +54,11 @@ def mergeL(row):
     if row[i-1] == 0:
       row[i-1]= row[i]
       row[i] = 0
+  return row
 
-
-
+#function to merge the entire board towards left in 1 go
+def mergeLeftFully(curBoard):
+  for i in range(sizeOfBoard-1):
+    curBoard[i] = mergeL(curBoard[i])
+  
+  return curBoard

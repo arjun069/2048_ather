@@ -125,6 +125,20 @@ def addRandValue():
   else:
     return 2
 
+
+#adding a new value after every move to a random space
+def addRandNewValue():
+  rowNum = random.randint(0,sizeOfBoard-1) 
+  colNum = random.randint(0,sizeOfBoard-1) 
+  #find empty spot 
+  while not game_board[rowNum][colNum] == 0:
+        rowNum = random.randint(0,sizeOfBoard-1) 
+        colNum = random.randint(0,sizeOfBoard-1) 
+  
+  #populate this empty spot w a value
+  game_board[rowNum][colNum] = addRandValue() 
+
+
 #empty board -> fill matrix w 0's first and then adding 2 numbers to the main matrix -> can be 2 or 4
 game_board = []
 for i in range(sizeOfBoard):
@@ -182,4 +196,5 @@ while not isGameOver:
     if(game_board == tempGameBoard):
       print("move unsuccessful try another direction")
     else:
+      addRandNewValue()
       printLikeMatrix()

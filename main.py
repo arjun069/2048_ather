@@ -145,6 +145,35 @@ while minNum > 0:
     minNum-=1
 
 
-# mergeDownFully(game_board)
 
-printLikeMatrix()
+
+isGameOver = False
+
+while not isGameOver:
+  inp = input("move which way? ")
+
+  valInp = True
+
+  if inp == "d":
+    game_board = mergeRightFully(game_board)
+  
+  
+  elif inp == "a":
+    game_board = mergeLeftFully(game_board)
+
+  
+  elif inp == "w":
+    game_board = mergeUpFully(game_board)
+
+  
+  elif inp == "s":
+    game_board = mergeDownFully(game_board)
+  
+  else:
+    valInp = False
+  
+
+  if not valInp:
+    print("Enter a valid input")
+  else:
+    printLikeMatrix()

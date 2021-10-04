@@ -1,11 +1,10 @@
 #4x4 matrix w random static values at the beginning 
-game_board = [[1024,2,4,8],[8,4,2,0],[0,0,2,0],[8,0,0,4]]
+game_board = [[4,8,8,8],[4,4,2,0],[0,0,2,0],[8,0,0,4]]
 
 
 sizeOfBoard = 4
 
 def printLikeMatrix():
-
 #finding out largest elemnt on board and then deciding number of spaces to make the board consistent
   largestElemOnBoard = game_board[0][0]
   for row in game_board:
@@ -27,9 +26,6 @@ def printLikeMatrix():
         currentRow+=(" "*(spacesNeeded-len(str(num)))) + str(num)+"|"
     print(currentRow)
   print()
-
-printLikeMatrix()
-
 
 #function to merge the current row towards the left
 def mergeL(row):
@@ -62,3 +58,33 @@ def mergeLeftFully(curBoard):
     curBoard[i] = mergeL(curBoard[i])
   
   return curBoard
+
+
+def reverseRow(row):
+  #add all numbers from the current row to a new list to reverse it
+  newList = []
+  for i in range(sizeOfBoard-1,-1,-1):
+    newList.append(row[i])
+  return newList
+
+
+#function to merge the entire board towards left in 1 go
+def mergeRightFully(curBoard):
+  for i in range(sizeOfBoard):
+
+  #to merge right -> reverse current row merge to left and reverse again to merge right
+    curBoard[i] = reverseRow(curBoard[i])
+    curBoard[i] = mergeL(curBoard[i])
+    curBoard[i] = reverseRow(curBoard[i])
+  return curBoard  
+  
+
+
+
+
+
+
+
+mergeRightFully(game_board)
+
+printLikeMatrix()

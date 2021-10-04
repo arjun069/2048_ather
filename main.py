@@ -1,5 +1,5 @@
 #4x4 matrix w random static values at the beginning 
-game_board = [[4,8,8,8],[4,4,2,0],[0,0,2,0],[8,0,0,4]]
+game_board = [[4,8,8,0],[4,4,2,0],[0,0,2,0],[8,0,0,4]]
 
 
 sizeOfBoard = 4
@@ -26,6 +26,10 @@ def printLikeMatrix():
         currentRow+=(" "*(spacesNeeded-len(str(num)))) + str(num)+"|"
     print(currentRow)
   print()
+
+
+
+printLikeMatrix()
 
 #function to merge the current row towards the left
 def mergeL(row):
@@ -68,6 +72,9 @@ def reverseRow(row):
   return newList
 
 
+
+
+
 #function to merge the entire board towards left in 1 go
 def mergeRightFully(curBoard):
   for i in range(sizeOfBoard):
@@ -80,11 +87,33 @@ def mergeRightFully(curBoard):
   
 
 
+def transposeRow(curBoard):
+  for j in range(sizeOfBoard):
+    for i in range(j,sizeOfBoard):
+      if not i == j:
+        temp = curBoard[j][i]
+        curBoard[j][i] = curBoard[i][j]
+        curBoard[i][j] = temp
+  return curBoard  
+#function to merge board upwards
+def mergeUpFully(curBoard):
+  #transpose board merge left and then transpose again to merge up
+  curBoard = transposeRow(curBoard)
+  curBoard = mergeLeftFully(curBoard)
+  curBoard = transposeRow(curBoard)
+
+  return curBoard
+
+#function to merge board downwards
+def mergeDownFully(curBoard):
+  #transpose board merge oight and then transpose again to merge down
+  curBoard = transposeRow(curBoard)
+  curBoard = mergeRightFully(curBoard)
+  curBoard = transposeRow(curBoard)
+
+  return curBoard
 
 
-
-
-
-mergeRightFully(game_board)
+mergeDownFully(game_board)
 
 printLikeMatrix()

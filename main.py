@@ -2,6 +2,7 @@
 # game_board = [[4,8,8,0],[4,4,2,0],[0,0,2,0],[8,0,0,4]]
 
 import random
+import copy
 
 sizeOfBoard = 4
 
@@ -144,7 +145,7 @@ while minNum > 0:
     game_board[rowNum][colNum] = addRandValue()
     minNum-=1
 
-
+printLikeMatrix()
 
 
 isGameOver = False
@@ -153,6 +154,8 @@ while not isGameOver:
   inp = input("move which way? ")
 
   valInp = True
+
+  tempGameBoard = copy.deepcopy(game_board)
 
   if inp == "d":
     game_board = mergeRightFully(game_board)
@@ -176,4 +179,7 @@ while not isGameOver:
   if not valInp:
     print("Enter a valid input")
   else:
-    printLikeMatrix()
+    if(game_board == tempGameBoard):
+      print("move unsuccessful try another direction")
+    else:
+      printLikeMatrix()

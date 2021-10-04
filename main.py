@@ -1,6 +1,7 @@
-#4x4 matrix w random static values at the beginning 
-game_board = [[4,8,8,0],[4,4,2,0],[0,0,2,0],[8,0,0,4]]
+# #4x4 matrix w random static values at the beginning 
+# game_board = [[4,8,8,0],[4,4,2,0],[0,0,2,0],[8,0,0,4]]
 
+import random
 
 sizeOfBoard = 4
 
@@ -29,7 +30,7 @@ def printLikeMatrix():
 
 
 
-printLikeMatrix()
+# printLikeMatrix()
 
 #function to merge the current row towards the left
 def mergeL(row):
@@ -114,6 +115,36 @@ def mergeDownFully(curBoard):
   return curBoard
 
 
-mergeDownFully(game_board)
+
+
+#adds a 2 or a 4 to the board at the beginning using random fucntion
+def addRandValue():
+  if random.randint(1,8) == 1:
+    return 4
+  else:
+    return 2
+
+#empty board -> fill matrix w 0's first and then adding 2 numbers to the main matrix -> can be 2 or 4
+game_board = []
+for i in range(sizeOfBoard):
+  row = []
+  for j in range(sizeOfBoard):
+      row.append(0)
+  game_board.append(row)   
+
+#minimum 2 values needed to start game
+minNum = 2
+while minNum > 0:
+  #choosing random row and column
+  rowNum = random.randint(0,sizeOfBoard-1) 
+  colNum = random.randint(0,sizeOfBoard-1) 
+
+  #if spot picked = empty add a randum value from function above and reduce minNum
+  if game_board[rowNum][colNum] == 0:
+    game_board[rowNum][colNum] = addRandValue()
+    minNum-=1
+
+
+# mergeDownFully(game_board)
 
 printLikeMatrix()

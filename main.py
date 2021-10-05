@@ -19,13 +19,13 @@ def printLikeMatrix():
 
 
   for row in game_board:
-    currentRow = "|"
+    currentRow = "  "
     #if list has a 0 , it needs to print space
     for num in row: 
       if num == 0:
-        currentRow+= " "*spacesNeeded + "|"
+        currentRow+= "_"*spacesNeeded + "  "
       else:
-        currentRow+=(" "*(spacesNeeded-len(str(num)))) + str(num)+"|"
+        currentRow+=("_"*(spacesNeeded-len(str(num)))) + str(num)+"  "
     print(currentRow)
   print()
 
